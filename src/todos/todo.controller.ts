@@ -1,4 +1,13 @@
-import {Controller,Get,Body,Post,Param,Delete,Patch} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Post,
+  Param,
+  Delete,
+  Patch,
+  Query,
+} from '@nestjs/common';
 import { TodoService } from './todo.service';
 
 @Controller('todos')
@@ -18,22 +27,27 @@ export class TodoController {
     return this.todoService.create(todoTitle, todoDescription);
   }
 
-  @Get(':id')
-  getTodoById(@Param('id') todoId: string): any {
-    return this.todoService.findOne(todoId);
+  @Get(':search')
+  getTodoByTitle(@Query('title') todoTitle: string): any {
+    return this.todoService.findContainOne(todoTitle);
   }
 
-  @Delete(':id')
-  deleteTodoById(@Param('id') todoId: string): any {
-    return this.todoService.deleteById(todoId);
+  @Get(':search')
+  getTodoByDescription(@Query('desc') todoDesc: string): any {
+    return this.todoService.findContainOne(todoDesc);
   }
 
-  @Patch(':id')
-  updateTodoById(
-    @Param('id') todoId: string,
-    @Body('title') todoTitle: string,
-    @Body('description') todoDescription: string,
-  ): any {
-    return this.todoService.UpdateById(todoId, todoTitle, todoDescription);
-  }
+  //   @Delete(':id')
+  //   deleteTodoById(@Param('id') todoId: string): any {
+  //     return this.todoService.deleteById(todoId);
+  //   }
+
+  //   @Patch(':id')
+  //   updateTodoById(
+  //     @Param('id') todoId: string,
+  //     @Body('title') todoTitle: string,
+  //     @Body('description') todoDescription: string,
+  //   ): any {
+  //     return this.todoService.UpdateById(todoId, todoTitle, todoDescription);
+  //   }
 }

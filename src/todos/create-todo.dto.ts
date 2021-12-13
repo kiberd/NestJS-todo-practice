@@ -1,6 +1,6 @@
-export class Todo {
+export class CreateTodoDto {
     constructor(
-      public id: string,
+      public date: Date,
       public todoTitle: string,
       public todoDescription: string,
     ) {}
