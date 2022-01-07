@@ -26,9 +26,11 @@ export class TodoService {
   async findContainOne(title: string): Promise<Todo[]> {
 
     const todoIndex = this.todoModel.find({ todoTitle: { $regex: title } });
+
     if (todoIndex === undefined) {
       throw new NotFoundException();
     }
+    
     return todoIndex;
   }
 
